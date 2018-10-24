@@ -1,0 +1,2 @@
+# LunchAndLearnFSharp
+F# capabilities demonstration 
