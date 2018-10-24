@@ -16,3 +16,10 @@ let toString (p: Product) =
     let newProd = { p with Formulation=[||]; FormulationEncrypted = serializeFormula p.Formulation }
     let xml = serializeProd newProd
     xml
+
+let fromString (prodStr: string) =
+    let p = deserializeXml<Product> prodStr   
+    let formulation = decrypt p.FormulationEncrypted |> deserialiseJson<FormulaItem[]>
+
+    let newProd = { p with Formulation=formulation; FormulationEncrypted = "" }
+    newProd
