@@ -10,8 +10,7 @@ type Product = { Name: string; Formulation: FormulaItem[]; FormulationEncrypted:
 
 
 let toString (p: Product) =         
-    let serializeProd (prod:Product) = serializeXml prod
-    //let serlializeFormula (f:List<FormulaItem>) = serializeJson f |> encrypt
+    let serializeProd (prod:Product) = serializeXml prod    
     let serializeFormula (f:FormulaItem[]) = serializeJson f |> encrypt
 
     let newProd = { p with Formulation=[||]; FormulationEncrypted = serializeFormula p.Formulation }
