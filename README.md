@@ -2,5 +2,5 @@
 F# capabilities demonstration 
 
 ``` f#
-fsharpi --use program.fsx
+fsharpi --use:program.fsx
 ```
