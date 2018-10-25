@@ -5,6 +5,7 @@
 
 open System
 open Product
+open Serialization
 
 let rand = Random()
 let beverages = [|"Wine"; "Beer"; "Yogurth"; "Coffee"; "Soft drink"; "Orange Juice"; "Wiskey"; "Lemonade"|]
@@ -23,10 +24,14 @@ let ingredientsGenerator =
 let productGenerator amount =        
     [ for i in 0 .. amount -> i] |> List.map (fun x -> { Name=getElementFromArray beverages; Formulation=ingredientsGenerator; FormulationEncrypted="" } )
     
-
-
-
-
+let productGeneratorJson amount =        
+    let products = productGenerator amount
+    products |> List.map (fun p -> serializeJson p) 
+    
+    
+    
+    
+//|> List.fold (fun strBuilder prodStr -> strBuilder.append(prodStr)) new StringBuilder()
 ///let water = { Name="Water"; Percent=10.00 }
 ///let sugar = { Name="Sugar"; Percent=10.00 }
 ///let coffeeGrains = { Name="Coffe Grains"; Percent=80.00 }
