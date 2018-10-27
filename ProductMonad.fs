@@ -1,24 +1,6 @@
 module ProductMonad
 open Product
-open Serialization
-open Encryption
 
-let toXmlString (p: Product) =         
-    let serializeProd (prod:Product) = serializeXml prod    
-    let serializeFormula (f:FormulaItem[]) = serializeJson f |> encrypt
-
-    let newProd = { p with Formulation=[||]; FormulationEncrypted = serializeFormula p.Formulation }
-    let xml = serializeProd newProd
-    xml
-
-let fromXmlString (prodStr: string) =
-    let p = deserializeXml<Product> prodStr   
-    let formulation = decrypt p.FormulationEncrypted |> deserialiseJson<FormulaItem[]>
-
-    let newProd = { p with Formulation=formulation; FormulationEncrypted = "" }
-    newProd
-
-/// ProductMonad: receives a product and returns a serialized product.
 type ProductMonad<'a> = 
     ProdMonad of (Product -> 'a * Product)
 
