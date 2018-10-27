@@ -2,12 +2,12 @@
 #load "Serialization.fs"
 #load "Encryption.fs"
 #load "Product.fs"
-#load "XmlProdSerializer.fs"
+#load "ProdSerializer.fs"
 
 open System
 open Product
 open Serialization
-open XmlProdSerializer
+open ProdSerializer
 
 let rand = Random()
 let beverages = [|"Wine"; "Beer"; "Yogurth"; "Coffee"; "Soft drink"; "Orange Juice"; "Wiskey"; "Lemonade"|]
