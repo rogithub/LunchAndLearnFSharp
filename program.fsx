@@ -3,20 +3,21 @@
 #load "Encryption.fs"
 #load "Product.fs"
 #load "ProductMonad.fs"
+#load "Agents.fs"
 
 open System
 open Product
 open ProductMonad
+open Agents
 
-let item1 = { Name = "Water"; Percent = 80.0 }
-let item2 = { Name = "Sugar"; Percent = 10.0 }
-let item3 = { Name = "Coffee"; Percent = 10.0 }
-let cupOfCoffe = Decrypted("Cup of Coffe", [|item1; item2; item3|])
 
-let encrypted = toggleEncryption cupOfCoffe
+let cupOfCoffe = { Id = 1; Name = "Cup of Coffe"; Formulation = [| ("Water", 80.0); ("Sugar", 10.0); ("Coffee", 10.0) |]; FormulaEncrypted = "" }
+let orangeJuice = { Id = 2; Name = "Orange Juice"; Formulation = [| ("Water", 80.0); ("Vitamins", 10.0); ("Orange", 10.0) |]; FormulaEncrypted = "" }
+let laptop = { Id = 3; Name = "Laptop"; Formulation = [| ("Plastic", 80.0); ("Hard Disk", 10.0 ); ("RAM", 10.0) |]; FormulaEncrypted = "" }
 
-let decripted1 = toggleEncryption encrypted
+let encrypted = encryptFormulation <| cupOfCoffe.Formulation
+let decripted1 = decryptFormulation <| encrypted
 
-decripted1 = cupOfCoffe
+decripted1 = cupOfCoffe.Formulation
 
 
