@@ -32,3 +32,4 @@ let decryptFormula (formula:string) =
     let decryptedFormula = decrypt formula |> deserialiseJson<FormulaItem[]>
     decryptedFormula
 
+let lift (prod, formula) = bind (prod, encryptFormula(formula))
