@@ -6,6 +6,7 @@
 open System
 open Product
 
+
 let cupOfCoffeE = FEncrypt ({Id = 1; Name = "Cup of Coffee";},"W3sibV9JdGVtMSI6IldhdGVyIiwibV9JdGVtMiI6ODB9LHsibV9JdGVtMSI6IlN1Z2FyIiwibV9JdGVtMiI6MTB9LHsibV9JdGVtMSI6IkNvZmZlZSIsIm1fSXRlbTIiOjEwfV0=")
 let orangeJuiceE = FEncrypt ({Id = 2; Name = "Orange Juice";}, "W3sibV9JdGVtMSI6IldhdGVyIiwibV9JdGVtMiI6ODB9LHsibV9JdGVtMSI6IlZpdGFtaW5zIiwibV9JdGVtMiI6MTB9LHsibV9JdGVtMSI6Ik9yYW5nZSIsIm1fSXRlbTIiOjEwfV0=")
 let laptopE = FEncrypt ({Id = 3; Name = "Laptop";}, "W3sibV9JdGVtMSI6IlBsYXN0aWMiLCJtX0l0ZW0yIjo4MH0seyJtX0l0ZW0xIjoiSGFyZCBEaXNrIiwibV9JdGVtMiI6MTB9LHsibV9JdGVtMSI6IlJBTSIsIm1fSXRlbTIiOjEwfV0=")
@@ -29,12 +30,12 @@ let mapped = map convertToArray cupOfCoffeE
 mapped |> printfn "MAP: %A %s" <| System.Environment.NewLine
 
 // FLAT-MAP
-//let appendItem (prod, formula:FormulaItem[]) =
-//    let newFormula = Array.append formula [| ("Convertir", 1.2) |]
-//    let newProd = { Id = prod.Id; Name = "Product with forumla length: " + newFormula.Length.ToString(); }
-//    newProd, newFormula
+let appendItem (formula:FormulaItem[]) =
+    let newFormula = Array.append formula [| ("Convertir", 1.2) |]
+    let encrypted = encryptFormula newFormula
+    encrypted
 
-//let flattened = (flatMap appendItem, cupOfCoffeE)
+let flattened = flatMap appendItem cupOfCoffeE
 
-//flattened |> printfn "FLAT: %A %s" <| System.Environment.NewLine
+flattened |> printfn "FLAT: %A %s" <| System.Environment.NewLine
 

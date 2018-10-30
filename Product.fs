@@ -31,7 +31,6 @@ let map f = function
 
 let flatMap fx = function
     | FEncrypt(prod, formula) ->
-        let (prod1, decrypted) = run (prod formula)
-        let (prod2, newDecrypted) = fx (prod1, decrypted)
-        let encrypted = encryptFormula newDecrypted
-        FEncrypt(prod2, encrypted)
+        let prod1, decrypted = run <| FEncrypt(prod, formula)
+        let encrypted = fx decrypted
+        FEncrypt(prod, encrypted)
