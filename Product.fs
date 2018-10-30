@@ -7,29 +7,29 @@ type FormulaItem = string * float
 
 type Product = { Id: int; Name: string; }
 
-type Encryptor<'prod, 'formula> = FEncryptor of 'prod * 'formula
+type Encryptor<'prod, 'formula> = FEncrypt of 'prod * 'formula
 
 let bind = function 
-    | (prod, formula) -> FEncryptor(prod, formula)
+    | (prod, formula) -> FEncrypt(prod, formula)
 
 let run = function
-    | FEncryptor(prod, formula) -> (prod, formula)
+    | FEncrypt(prod, formula) -> (prod, formula)
 
 let map fx = function
-    | FEncryptor(prod, formula) -> FEncryptor(fx prod, formula)
+    | FEncrypt(prod, formula) -> FEncrypt(fx prod, formula)
 
 let flatMap fx = function
-    | FEncryptor(prod, formula) -> 
+    | FEncrypt(prod, formula) -> 
         let (prod, new_formula) = run (fx prod)
-        FEncryptor(prod, Array.append formula new_formula)
+        FEncrypt(prod, Array.append formula new_formula)
 
 
 let encryptFormula (formula:FormulaItem[]) =
-    let encryptedFormula = formula |> serializeJson |> encrypt
+    let encryptedFormula = formula |> serializeJson |> encryptText
     encryptedFormula
 
 let decryptFormula (formula:string) =
-    let decryptedFormula = decrypt formula |> deserialiseJson<FormulaItem[]>
+    let decryptedFormula = decryptText formula |> deserialiseJson<FormulaItem[]>
     decryptedFormula
 
 let lift (prod, formula) = bind (prod, encryptFormula(formula))
