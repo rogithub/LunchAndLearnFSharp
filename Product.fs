@@ -5,11 +5,10 @@ open Encryption
 [<CLIMutable>]
 type FormulaItem = string * float
 
-type Encrypted = { Id: int; Name: string; Formulation: string }
-type Decrypted = { Id: int; Name: string; Formulation: FormulaItem[] }
+type Product = { Id: int; Name: string; }
 
 type Encryptor<'prod, 'formula> = FEncryptor of 'prod * 'formula
- 
+
 let bind = function 
     | (prod, formula) -> FEncryptor(prod, formula)
 
@@ -25,11 +24,11 @@ let flatMap fx = function
         FEncryptor(prod, Array.append formula new_formula)
 
 
-let encryptProd (prod:Decrypted) =
-    let encryptedFormula = prod.Formulation |> serializeJson |> encrypt
-    { Encrypted.Id = prod.Id; Name = prod.Name; Formulation = encryptedFormula }
+let encryptFormula (formula:FormulaItem[]) =
+    let encryptedFormula = formula |> serializeJson |> encrypt
+    encryptedFormula
 
-let decryptProd (prod:Encrypted) =
-    let decryptedFormula = decrypt prod.Formulation |> deserialiseJson<FormulaItem[]>
-    { Decrypted.Id = prod.Id; Name = prod.Name; Formulation = decryptedFormula } 
+let decryptFormula (formula:string) =
+    let decryptedFormula = decrypt formula |> deserialiseJson<FormulaItem[]>
+    decryptedFormula
 
