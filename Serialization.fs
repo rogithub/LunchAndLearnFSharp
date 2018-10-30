@@ -2,9 +2,6 @@ module Serialization
 open System.Runtime.Serialization
 open System.Runtime.Serialization.Json
 open System.IO
-open System.Text
-open System.Xml
-open System.Xml.Serialization
 
 let toString = System.Text.Encoding.ASCII.GetString
 let toBytes (x : string) = System.Text.Encoding.ASCII.GetBytes x
