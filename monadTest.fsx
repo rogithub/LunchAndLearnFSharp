@@ -2,9 +2,11 @@
 #load "Serialization.fs"
 #load "Encryption.fs"
 #load "Product.fs"
+#load "Agents.fs"
 #load "Monad.fs"
 open System
 open myFsharpProject.Product
+open myFsharpProject.Agents
 open myFsharpProject.Monad
 
 
