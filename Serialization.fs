@@ -1,33 +1,34 @@
-module Serialization
-open System.Runtime.Serialization
-open System.Runtime.Serialization.Json
-open System.IO
+﻿namespace myFsharpProject
+module internal Serialization =
+    open System.Runtime.Serialization
+    open System.Runtime.Serialization.Json
+    open System.IO
 
-let toString = System.Text.Encoding.ASCII.GetString
-let toBytes (x : string) = System.Text.Encoding.ASCII.GetBytes x
+    let toString = System.Text.Encoding.ASCII.GetString
+    let toBytes (x : string) = System.Text.Encoding.ASCII.GetBytes x
 
-let serializeXml<'a> (x : 'a) =
-    let xmlSerializer = new DataContractSerializer(typedefof<'a>)
+    let serializeXml<'a> (x : 'a) =
+        let xmlSerializer = new DataContractSerializer(typedefof<'a>)
 
-    use stream = new MemoryStream()
-    xmlSerializer.WriteObject(stream, x)
-    toString <| stream.ToArray()
+        use stream = new MemoryStream()
+        xmlSerializer.WriteObject(stream, x)
+        toString <| stream.ToArray()
 
-let deserializeXml<'a> (xml : string) =
-    let xmlSerializer = new DataContractSerializer(typedefof<'a>)
+    let deserializeXml<'a> (xml : string) =
+        let xmlSerializer = new DataContractSerializer(typedefof<'a>)
 
-    use stream = new MemoryStream(toBytes xml)
-    xmlSerializer.ReadObject(stream) :?> 'a
+        use stream = new MemoryStream(toBytes xml)
+        xmlSerializer.ReadObject(stream) :?> 'a
 
-let serializeJson<'a> (x : 'a) = 
-    let jsonSerializer = new DataContractJsonSerializer(typedefof<'a>)
+    let serializeJson<'a> (x : 'a) =
+        let jsonSerializer = new DataContractJsonSerializer(typedefof<'a>)
 
-    use stream = new MemoryStream()
-    jsonSerializer.WriteObject(stream, x)
-    toString <| stream.ToArray()
+        use stream = new MemoryStream()
+        jsonSerializer.WriteObject(stream, x)
+        toString <| stream.ToArray()
 
-let deserialiseJson<'a> (json : string) =
-    let jsonSerializer = new DataContractJsonSerializer(typedefof<'a>)
+    let deserialiseJson<'a> (json : string) =
+        let jsonSerializer = new DataContractJsonSerializer(typedefof<'a>)
 
-    use stream = new MemoryStream(toBytes json)
-    jsonSerializer.ReadObject(stream) :?> 'a
+        use stream = new MemoryStream(toBytes json)
+        jsonSerializer.ReadObject(stream) :?> 'a
