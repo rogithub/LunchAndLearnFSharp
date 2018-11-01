@@ -2,19 +2,18 @@
 #load "Serialization.fs"
 #load "Encryption.fs"
 #load "Product.fs"
-#load "Agents.fs"
 #load "Monad.fs"
 #load "Database.fs"
 open System
 open myFsharpProject.Serialization
 open myFsharpProject.Encryption
 open myFsharpProject.Product
-open myFsharpProject.Agents
-open myFsharpProject.Monad
 open myFsharpProject.Database
+open myFsharpProject.Monad
+
 
 let cupOfCoffeE = getById 1;
-cupOfCoffeE |> printfn "BIND: %A %s" <| Environment.NewLine
+cupOfCoffeE |> printfn "Get from db: %A %s" <| Environment.NewLine
 
 
 

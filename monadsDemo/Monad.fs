@@ -1,21 +1,12 @@
 ﻿namespace myFsharpProject
 module internal Monad =
-    open myFsharpProject.Agents
     open myFsharpProject.Product
 
-    let encryptFormula (formula:FormulaItem[]) =
-        let reply = agent.PostAndReply(fun replyChannel -> Encrypt ( formula, replyChannel ))
-        reply
-
-    let decryptFormula (formula:string) =
-        let reply = agent.PostAndReply(fun replyChannel -> Decrypt ( formula, replyChannel ))
-        reply
-
     let bind = function
-        | (prod, formula) -> FEncrypt(prod, encryptFormula formula)
+        | (prod, formula) -> FEncrypt(prod, formula)
 
     let run = function
-        | FEncrypt(prod, formula) -> (prod, decryptFormula formula)
+        | FEncrypt(prod, formula) -> (prod, formula)
 
     let map f = function
          | FEncrypt(prod, formula) ->
