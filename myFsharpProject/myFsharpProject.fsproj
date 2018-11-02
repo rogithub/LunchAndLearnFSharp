@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Encryption.fs" />
+    <Compile Include="Serialization.fs" />
+    <Compile Include="Product.fs" />
+    <Compile Include="Database.fs" />
+    <Compile Include="EncryptionAgent.fs" />
+    <Compile Include="JobProcessor.fs" />
+  </ItemGroup>
+
+</Project>
