@@ -9,9 +9,7 @@ using System.Diagnostics;
 namespace ConsoleProject
 {
 	public class RaceConditionTest
-	{
-
-		//http://www.gotw.ca/publications/concurrency-ddj.htm
+	{		
 		public static void Test()
 		{
 			Stopwatch watch = new Stopwatch();
