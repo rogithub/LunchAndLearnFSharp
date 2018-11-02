@@ -1,6 +1,5 @@
 namespace myFsharpProject
-module internal EncryptionAgent =
-    //https://blogs.msdn.microsoft.com/dsyme/2010/02/15/async-and-parallel-design-patterns-in-f-agents/
+module internal EncryptionAgent =    
 
     open myFsharpProject.Serialization
     open myFsharpProject.Encryption
