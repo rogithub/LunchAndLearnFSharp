@@ -5,7 +5,7 @@ module internal Database =
 
     let getById id = async {
 
-        // Encrypted formulas for list bellow
+        // Encrypted (Base64 string) formulas for list bellow
 
         //let f0 = [| { Name = "Water"; Percent = 80.0}; { Name = "Sugar"; Percent = 10.0}; { Name = "Coffee"; Percent = 10.0 } |]
         //let f1 = [| { Name = "Water"; Percent = 80.0}; { Name = "Vitamins"; Percent = 10.0}; { Name = "Orange"; Percent = 10.0 } |]
