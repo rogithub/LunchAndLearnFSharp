@@ -6,7 +6,7 @@ namespace ConsoleProject
     {
         static void Main(string[] args)
         {
-            RaceConditionTest.Test();
+            //RaceConditionTest.Test();
             JobProcessorTest.Test();
             Console.ReadKey();
         }
