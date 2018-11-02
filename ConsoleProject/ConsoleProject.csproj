@@ -4,6 +4,10 @@
     <ProjectReference Include="..\myFsharpProject\myFsharpProject.fsproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
