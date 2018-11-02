@@ -1,13 +1,13 @@
 # LunchAndLearnFSharp
 F# capabilities demonstration 
 
-# Execute dotnet core Windows
+# Run Windows
 ``` C#
 Double click on solution file
 "LunchAndLearn.sln"
 ```
 
-# Execute dotnet core linux
+# Run linux
 ``` C#
 $ cd ConsoleProject
 $ dotnet run
