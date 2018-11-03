@@ -7,6 +7,10 @@ namespace ConsoleProject
 {
 	public class JobProcessorTest
 	{
+		/// Strings in C# are inmutable!!!
+		/// If we re-write function to encrypt/decrypt in Portal
+		/// in a F# func that takes as input string (xml) and
+		/// returns string (encrypted xml) we could make it faster! 
 		public static void Test()
 		{
 			var jobProcessor = new Services.JobProcessor();

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleProject", "ConsolePr
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "myFsharpProject", "myFsharpProject\myFsharpProject.fsproj", "{7BD86FC9-7E21-43D9-A3CD-E20ABCCDEA05}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FConsoleProject", "FConsoleProject\FConsoleProject.fsproj", "{51EE41A5-45AB-421B-BA67-705ABBFF042A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{7BD86FC9-7E21-43D9-A3CD-E20ABCCDEA05}.Release|x64.Build.0 = Release|Any CPU
 		{7BD86FC9-7E21-43D9-A3CD-E20ABCCDEA05}.Release|x86.ActiveCfg = Release|Any CPU
 		{7BD86FC9-7E21-43D9-A3CD-E20ABCCDEA05}.Release|x86.Build.0 = Release|Any CPU
+		{51EE41A5-45AB-421B-BA67-705ABBFF042A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51EE41A5-45AB-421B-BA67-705ABBFF042A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51EE41A5-45AB-421B-BA67-705ABBFF042A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{51EE41A5-45AB-421B-BA67-705ABBFF042A}.Debug|x64.Build.0 = Debug|Any CPU
+		{51EE41A5-45AB-421B-BA67-705ABBFF042A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{51EE41A5-45AB-421B-BA67-705ABBFF042A}.Debug|x86.Build.0 = Debug|Any CPU
+		{51EE41A5-45AB-421B-BA67-705ABBFF042A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51EE41A5-45AB-421B-BA67-705ABBFF042A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51EE41A5-45AB-421B-BA67-705ABBFF042A}.Release|x64.ActiveCfg = Release|Any CPU
+		{51EE41A5-45AB-421B-BA67-705ABBFF042A}.Release|x64.Build.0 = Release|Any CPU
+		{51EE41A5-45AB-421B-BA67-705ABBFF042A}.Release|x86.ActiveCfg = Release|Any CPU
+		{51EE41A5-45AB-421B-BA67-705ABBFF042A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
