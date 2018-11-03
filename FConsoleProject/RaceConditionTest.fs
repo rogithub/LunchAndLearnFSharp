@@ -5,19 +5,25 @@ module RaceConditionTest =
     open System.Threading
 
     /// Add numbers to list
-    let addUpTo count =
+    let addUpTo count (sleep:int) =
         let wait value = async { 
-            Thread.Sleep 1000
+            Thread.Sleep sleep
             return value
         }
-        seq { for i in 0 .. (count - 1) -> wait i } |> List.ofSeq |> Async.Parallel |> Async.RunSynchronously
+        let list = seq { for i in 0 .. (count - 1) -> wait i } |> Async.Parallel |> Async.RunSynchronously |> List.ofSeq
+        printfn "List length: %d Expected: %d" list.Length count
+        list
 
-    let test () = 
+    let (>>=) m f = 
+        let cores = Environment.ProcessorCount;
+        let threadId = Thread.CurrentThread.ManagedThreadId
         let watch = new Stopwatch()
         watch.Start()
-        let count = Environment.ProcessorCount;
-        //let count = 1000000;
-
-        let list = addUpTo count 
-        printfn "The total count should be %d. The list count is %d. It took %d ms." count list.Length watch.ElapsedMilliseconds
+        let result = f m
+        printfn "Cores: %d, ThreadId: %d, Timing: %dms" cores threadId watch.ElapsedMilliseconds
+        result
         
+    let test count sleep =
+        sleep >>= addUpTo count
+
+    
