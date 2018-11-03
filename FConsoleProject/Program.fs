@@ -5,7 +5,6 @@ open FConsole
 
 [<EntryPoint>]
 let main argv =
-    RaceConditionTest.test
-    
-    printfn "Hello World from F#!"
+    //let list = RaceConditionTest.test 4 1000
+    Monads.test()
     0 // return an integer exit code
