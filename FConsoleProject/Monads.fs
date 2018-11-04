@@ -31,6 +31,21 @@ module Monads =
             let tupletted = (nameAndPercent, newformulaItems)
             tupletted
         M transform
+    
+    let returnM formulaItems = 
+        let convertIntoM nameAndPercent = 
+            let tupletted = nameAndPercent, formulaItems
+            tupletted
+        M convertIntoM
+
+    let bindM f formulationM = 
+        let binder nameAndPercent = 
+            let (name1,percent1), items1 = runM formulationM nameAndPercent
+            let newformulationM = f items1 
+            let (name2,percent2), items2 = runM newformulationM nameAndPercent
+            let tupletted = nameAndPercent, items2
+            tupletted
+        M binder
 
     let increase10Percent formulaItems = 
         let f = formulaItems |> Array.map (fun (n, p) -> (n, p * 1.10))
@@ -39,14 +54,6 @@ module Monads =
     let combineFormulas formula1 formula2 = 
         let f = Array.concat [formula1; formula2]
         f
-    
-    let returnM formulaItems = 
-        let convertIntoM nameAndPercent = 
-            let tupletted = nameAndPercent, formulaItems
-            tupletted
-        M convertIntoM
-
-
 
     let test () =
         let water = ("Water", 80.0)
