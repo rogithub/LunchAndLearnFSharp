@@ -39,6 +39,14 @@ module Monads =
     let combineFormulas formula1 formula2 = 
         let f = Array.concat [formula1; formula2]
         f
+    
+    let returnM formulaItems = 
+        let convertIntoM nameAndPercent = 
+            let tupletted = nameAndPercent, formulaItems
+            tupletted
+        M convertIntoM
+
+
 
     let test () =
         let water = ("Water", 80.0)
@@ -58,3 +66,6 @@ module Monads =
         let gasoCofee = runM combinatorMakerM ("gasoline coffee", 100.0)
         printfn "%A" gasoCofee
 
+        let orangeJuiceMakerM = returnM [| ("Oranges", 100.0); water |]
+        let orangeJuice = runM orangeJuiceMakerM ("Orange Juice", 20.3)
+        printfn "%A" orangeJuice
