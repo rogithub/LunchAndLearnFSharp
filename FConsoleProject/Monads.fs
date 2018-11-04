@@ -5,31 +5,20 @@ module Monads =
     open System.Threading
 
     type FormulaType<'a> = FormulaItem of 'a * 'a[]
+    type M<'T> =
+        M of ((string * float) -> 'T)
 
-    let mix c1 c = 
-        let tupletted = (c1, c)
-        tupletted
-       
-    type FormulaBuilder() =
+    let makeFormulation fomulaItems =
+        let makeKitProduct nameAndPercent =
+            let tupletted = (nameAndPercent, fomulaItems)
+            FormulaItem tupletted
+        M makeKitProduct
     
-        member this.Bind(m, f) = 
-            printfn "expression is %A" m
-            let result = f m
-            result
-
-        member this.Return(item) = 
-            FormulaItem item
+    let test () =
+        let water = ("Water", 80.0)
+        let coffeGrains = ("Coffee grains", 10.0)
+        let sugar = ("Sugar", 10.0)
+        let makeCupOfCofee = makeFormulation [|water; coffeGrains; sugar|]
+        //let cupOfCoffe = makeCupOfCofee "Cup of Coffe", 80.0
+        printfn "%A" makeCupOfCofee
         
-        member this.ReturnFrom(m) = 
-            m  
-
-    let test () = 
-        let builder = new FormulaBuilder()
-        let formulation = builder {
-            let water = ("Water", 80)
-            let coffeGrains = ("Coffe Grains", 10)
-            let sugar = ("Sugar", 10)
-            let cupOfCoffe = mix ("CupOfCoffe", 80) [|water; coffeGrains; sugar|]
-            return cupOfCoffe
-        }
-        printfn "%A" formulation 
