@@ -4,24 +4,23 @@ module Monads =
     open System.Diagnostics
     open System.Threading
 
-    type FormulaType<'a> = FormulaItem of 'a * 'a[]
     type M<'T> =
-        M of ((string * float) -> 'T)
+        M of ('T -> 'T * 'T[])
 
     let makeFormulation fomulaItems =
         let makeKitProduct nameAndPercent =
             let tupletted = (nameAndPercent, fomulaItems)
-            FormulaItem tupletted
+            tupletted
         M makeKitProduct
     
     let runM (M f) nameAndPercent = f nameAndPercent
 
     let mapM f formulationM =
         let transform nameAndPercent = 
-            let nameAndPercent, formulaItems = runM formulationM nameAndPercent
+            let (name,percent), formulaItems = runM formulationM nameAndPercent
             let newformulaItems  = f formulaItems
-            let tupletted = (nameAndPercent, newformulaItems)
-            FormulaItem tupletted
+            let tupletted = ((name,percent), newformulaItems)
+            tupletted
         M transform
 
     let increase10Percent formulaItems = 
@@ -37,6 +36,6 @@ module Monads =
         let cupOfCoffe = runM coffeeMakerM ("Cup of Coffe", 80.0)
         printfn "%A" cupOfCoffe
         
-        //let coffeeMaker10DecialM = mapM increase10Percent coffeeMakerM
-        //let cupOfCoffeIncreased = runM coffeeMaker10DecialM ("Cup of Coffe", 81.0)
-        //printfn "%A" cupOfCoffeIncreased
+        let coffeeMaker10DecialM = mapM increase10Percent coffeeMakerM
+        let cupOfCoffeIncreased = runM coffeeMaker10DecialM ("Cup of Coffe +10%", 81.0)
+        printfn "%A" cupOfCoffeIncreased
