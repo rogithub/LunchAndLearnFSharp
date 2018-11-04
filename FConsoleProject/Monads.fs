@@ -16,12 +16,27 @@ module Monads =
     
     let runM (M f) nameAndPercent = f nameAndPercent
 
+    let mapM f formulationM =
+        let transform nameAndPercent = 
+            let nameAndPercent, formulaItems = runM formulationM nameAndPercent
+            let newformulaItems  = f formulaItems
+            let tupletted = (nameAndPercent, newformulaItems)
+            FormulaItem tupletted
+        M transform
+
+    let increase10Percent formulaItems = 
+        let f = formulaItems |> Array.map (fun (n, p) -> (n, p * 1.10))
+        f
+
     let test () =
         let water = ("Water", 80.0)
         let coffeGrains = ("Coffee grains", 10.0)
         let sugar = ("Sugar", 10.0)
-        let makeCupOfCofee = makeFormulation [|water; coffeGrains; sugar|]
+        let coffeeMakerM = makeFormulation [|water; coffeGrains; sugar|]
         
-        let cupOfCoffe = runM makeCupOfCofee ("Cup of Coffe", 80.0)
+        let cupOfCoffe = runM coffeeMakerM ("Cup of Coffe", 80.0)
         printfn "%A" cupOfCoffe
         
+        //let coffeeMaker10DecialM = mapM increase10Percent coffeeMakerM
+        //let cupOfCoffeIncreased = runM coffeeMaker10DecialM ("Cup of Coffe", 81.0)
+        //printfn "%A" cupOfCoffeIncreased
