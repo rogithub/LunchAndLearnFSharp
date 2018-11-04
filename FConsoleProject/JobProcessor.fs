@@ -21,15 +21,13 @@ module JobProcessor =
             loop 0)
         
         static member test count =
-            let rec sendMessages index jobs =
-                if index = count then jobs
+            let rec sendMessages index =
+                if index = count then index
                 else                    
                     let msg = sprintf "Message index %d: thread %d" index Thread.CurrentThread.ManagedThreadId
-                    let job = async { myJobProcessor.Post(msg) }
-                    let newList = job::jobs
-                    sendMessages (index+1) newList
+                    myJobProcessor.Post(msg)
+                    sendMessages (index+1)
             
-            let jobs = sendMessages 0 []
-            jobs |> Async.Parallel |> Async.RunSynchronously |> ignore
-            printfn "Done sending %d messages %s" count Environment.NewLine
+            let jobsCount = sendMessages 0            
+            printfn ">> Done sending %d messages %s " jobsCount Environment.NewLine
             
