@@ -14,11 +14,14 @@ module Monads =
             FormulaItem tupletted
         M makeKitProduct
     
+    let runM (M f) nameAndPercent = f nameAndPercent
+
     let test () =
         let water = ("Water", 80.0)
         let coffeGrains = ("Coffee grains", 10.0)
         let sugar = ("Sugar", 10.0)
         let makeCupOfCofee = makeFormulation [|water; coffeGrains; sugar|]
-        //let cupOfCoffe = makeCupOfCofee "Cup of Coffe", 80.0
-        printfn "%A" makeCupOfCofee
+        
+        let cupOfCoffe = runM makeCupOfCofee ("Cup of Coffe", 80.0)
+        printfn "%A" cupOfCoffe
         
