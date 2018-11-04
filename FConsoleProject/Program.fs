@@ -6,5 +6,6 @@ open FConsole
 [<EntryPoint>]
 let main argv =
     //let list = RaceConditionTest.test 4 1000
-    Monads.test()
+    //Monads.test()
+    JobProcessor.MyJobProcessor.test 10    
     0 // return an integer exit code
