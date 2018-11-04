@@ -8,15 +8,15 @@ module JobProcessor =
 
         static let myJobProcessor = MailboxProcessor.Start(fun inbox ->
             let rec loop n =
-                async {                     
+                async {                                         
                     let! msg = inbox.Receive()
                     
-                    //Process job
-                    printfn "%s | Job index %d: thread %d" msg n Thread.CurrentThread.ManagedThreadId
-                    
-                    //End Process
+                    if (n%100000 = 0) then
+                        printfn "%s | Job index %d: thread %d" msg n Thread.CurrentThread.ManagedThreadId
+                    else 
+                        ignore
 
-                    return! loop(n+1) 
+                    return! loop(n+1)           
                 }
             loop 0)
         
@@ -29,5 +29,5 @@ module JobProcessor =
                     sendMessages (index+1)
             
             let jobsCount = sendMessages 0            
-            printfn ">> Done sending %d messages %s " jobsCount Environment.NewLine
+            printfn ">> Done sending %d messages %s" jobsCount Environment.NewLine
             
