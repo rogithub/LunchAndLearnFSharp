@@ -8,7 +8,7 @@ namespace ConsoleProject
         {
             //RaceConditionTest.Test();
             //RaceConditionTest.Test1();
-            JobProcessorTest.Test();
+            ProductServices.Test();
             Console.ReadKey();
         }
     }

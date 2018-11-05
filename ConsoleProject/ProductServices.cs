@@ -5,7 +5,7 @@ using myFsharpProject;
 
 namespace ConsoleProject
 {
-	public class JobProcessorTest
+	public class ProductServices
 	{
 		/// Strings in C# are inmutable!!!
 		/// If we re-write function to encrypt/decrypt in Portal
