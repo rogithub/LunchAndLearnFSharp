@@ -8,4 +8,5 @@ let main argv =
     //let list = RaceConditionTest.test 4 1000
     //Monads.test()
     JobProcessor.MyJobProcessor.test 1000000
-    0 // return an integer exit code
+    System.Console.ReadKey() |> ignore
+    0 // return an integer exit code    
