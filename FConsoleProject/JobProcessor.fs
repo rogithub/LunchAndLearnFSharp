@@ -22,7 +22,7 @@ module JobProcessor =
         
         static member test count =
             let rec sendMessages index =
-                if index = count then index
+                if index > count then index
                 else                    
                     let msg = sprintf "Message index %d: thread %d" index Thread.CurrentThread.ManagedThreadId
                     myJobProcessor.Post(msg)
