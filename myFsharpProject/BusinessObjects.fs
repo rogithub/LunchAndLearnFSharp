@@ -1,5 +1,5 @@
 namespace myFsharpProject
-module Product =
+module BusinessObjects =
     open System
 
     type Component = { Name: string; Percent: float }

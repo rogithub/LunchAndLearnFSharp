@@ -1,7 +1,7 @@
 namespace myFsharpProject
 module internal Database =
 
-    open Product
+    open BusinessObjects
 
     let getById id = async {
 

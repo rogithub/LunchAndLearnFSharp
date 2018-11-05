@@ -7,10 +7,10 @@
   <ItemGroup>
     <Compile Include="Encryption.fs" />
     <Compile Include="Serialization.fs" />
-    <Compile Include="Product.fs" />
+    <Compile Include="BusinessObjects.fs" />
     <Compile Include="Database.fs" />
-    <Compile Include="EncryptionAgent.fs" />
-    <Compile Include="JobProcessor.fs" />
+    <Compile Include="EncryptionComponent.fs" />
+    <Compile Include="ProductServices.fs" />
   </ItemGroup>
 
   <ItemGroup>

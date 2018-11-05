@@ -1,9 +1,9 @@
 namespace myFsharpProject
-module internal EncryptionAgent =    
+module internal EncryptionComponent =    
 
     open myFsharpProject.Serialization
     open myFsharpProject.Encryption
-    open myFsharpProject.Product
+    open myFsharpProject.BusinessObjects
 
 
     let encryptFormula (formula:Component[]) = async {

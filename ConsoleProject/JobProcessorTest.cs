@@ -13,30 +13,30 @@ namespace ConsoleProject
 		/// returns string (encrypted xml) we could make it faster! 
 		public static void Test()
 		{
-			var jobProcessor = new Services.JobProcessor();
+			var service = new Product.Services();
 
 			// Create
-			Product.Component[] components = {
-				new Product.Component("Agua", 10.9),
-				new Product.Component("Cromo", 10.9),
-				new Product.Component("Manganeso", 10.9)
+			BusinessObjects.Component[] components = {
+				new BusinessObjects.Component("Agua", 10.9),
+				new BusinessObjects.Component("Cromo", 10.9),
+				new BusinessObjects.Component("Manganeso", 10.9)
 			};
-			Product.CreateNew info = new Product.CreateNew(100, "Tumbirichato de amonio", components);
-			Product.SharedProduct product = jobProcessor.Create(info);
+			BusinessObjects.CreateNew info = new BusinessObjects.CreateNew(100, "Tumbirichato de amonio", components);
+			BusinessObjects.SharedProduct product = service.Create(info);
 
 			Console.WriteLine("{0}", product);
 
 			// Merge
-			var prodArray = jobProcessor.GetMany(new int[] { 1, 2, 3, 4, 5, 6 });
+			var prodArray = service.GetMany(new int[] { 1, 2, 3, 4, 5, 6 });
 
-			Product.CreateFrom fromInfo = new Product.CreateFrom(101, "Kit Product", components, prodArray);
-			Product.SharedProduct product2 = jobProcessor.Create(fromInfo);
+			BusinessObjects.CreateFrom fromInfo = new BusinessObjects.CreateFrom(101, "Kit Product", components, prodArray);
+			BusinessObjects.SharedProduct product2 = service.Create(fromInfo);
 
 			Console.WriteLine("{0}", product2);
 
-			//var predicate = FuncConvert.ToFSharpFunc((Product.Component c) => c.Name == "Poison" && c.Percent > 10);
-			//Product.QueryInfo queryInfo = new Product.QueryInfo(predicate, product2.Formula);
-			//bool result = jobProcessor.Query(queryInfo);
+			//var predicate = FuncConvert.ToFSharpFunc((BusinessObjects.Component c) => c.Name == "Poison" && c.Percent > 10);
+			//BusinessObjects.QueryInfo queryInfo = new BusinessObjects.QueryInfo(predicate, product2.Formula);
+			//bool result = service.Query(queryInfo);
 
 			//Console.WriteLine("product2 has Poison > 10% = {0}", result);
 		}
