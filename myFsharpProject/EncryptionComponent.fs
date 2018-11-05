@@ -3,8 +3,6 @@ module internal EncryptionComponent =
 
     open Serialization
     open Encryption
-    open BusinessObjects
-
 
     let encryptFormula (formula:Component[]) = async {
         let encryptedFormula = formula |> serializeJson |> encryptText
