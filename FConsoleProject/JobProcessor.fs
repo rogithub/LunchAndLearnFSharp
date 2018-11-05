@@ -12,9 +12,7 @@ module JobProcessor =
                     let! msg = inbox.Receive()
                     
                     if (n%100000 = 0) then
-                        printfn "%s | Job index %d: thread %d" msg n Thread.CurrentThread.ManagedThreadId
-                    else 
-                        ignore
+                        printfn "%s | Job index %d: thread %d" msg n Thread.CurrentThread.ManagedThreadId                    
 
                     return! loop(n+1)           
                 }
@@ -22,7 +20,7 @@ module JobProcessor =
         
         static member test count =
             let rec sendMessages index =
-                if index > count then index
+                if index = count then index
                 else                    
                     let msg = sprintf "Message index %d: thread %d" index Thread.CurrentThread.ManagedThreadId
                     myJobProcessor.Post(msg)
