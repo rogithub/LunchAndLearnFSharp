@@ -1,8 +1,8 @@
 ﻿namespace myFsharpProject
 module Product =
 
-    open myFsharpProject.BusinessObjects
-    open myFsharpProject.EncryptionComponent
+    open BusinessObjects
+    open EncryptionComponent
 
     type Services() =
 
