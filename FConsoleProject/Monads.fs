@@ -40,10 +40,10 @@ module Monads =
 
     let bindM f formulationM = 
         let binder nameAndPercent = 
-            let (name1,percent1), items1 = runM formulationM nameAndPercent
+            let nameAndPercent1, items1 = runM formulationM nameAndPercent
             let newformulationM = f items1 
-            let (name2,percent2), items2 = runM newformulationM nameAndPercent
-            let tupletted = nameAndPercent, items2
+            let (name2,percent2), items2 = runM newformulationM nameAndPercent1
+            let tupletted = (name2,percent2), items2
             tupletted
         M binder
 
@@ -54,6 +54,17 @@ module Monads =
     let combineFormulas formula1 formula2 = 
         let f = Array.concat [formula1; formula2]
         f
+    
+    let makeAll100Percent items1 =
+        let makeOneHundredPercent nameAndPercent =
+            let (name, percent) = nameAndPercent
+            let items2 = items1 |> Array.map (fun (n, p) -> (n, 100.0))
+            let tupletted = (name, 100.0), items2
+            tupletted
+        M makeOneHundredPercent
+
+    let printResult result =
+         printfn "%A %s" result Environment.NewLine
 
     let test () =
         let water = ("Water", 80.0)
@@ -62,17 +73,21 @@ module Monads =
         let coffeeMakerM = makeFormulation [|water; coffeGrains; sugar|]
 
         let cupOfCoffe = runM coffeeMakerM ("Cup of Coffe", 80.0)
-        printfn "%A" cupOfCoffe
+        printResult cupOfCoffe
         
         let coffeeMaker10DecialM = mapM increase10Percent coffeeMakerM
         let cupOfCoffeIncreased = runM coffeeMaker10DecialM ("Cup of Coffe +10%", 81.0)
-        printfn "%A" cupOfCoffeIncreased
+        printResult cupOfCoffeIncreased
 
         let gasolineMakerM = makeFormulation [|("Oil", 9.9); ("petroleum", 5.5);|]
         let combinatorMakerM = map2M combineFormulas gasolineMakerM coffeeMakerM
         let gasoCofee = runM combinatorMakerM ("gasoline coffee", 100.0)
-        printfn "%A" gasoCofee
+        printResult gasoCofee
 
         let orangeJuiceMakerM = returnM [| ("Oranges", 100.0); water |]
         let orangeJuice = runM orangeJuiceMakerM ("Orange Juice", 20.3)
-        printfn "%A" orangeJuice
+        printResult orangeJuice
+
+        let coffee100percentMakerM = bindM makeAll100Percent coffeeMakerM
+        let oneHundredCoffee = runM coffee100percentMakerM ("Coffee 100%", 33.33)
+        printResult oneHundredCoffee
