@@ -6,12 +6,6 @@ module Monads =
 
     type M<'T> =
         M of ('T -> 'T * 'T[])
-
-    let makeFormulation fomulaItems =
-        let makeKitProduct nameAndPercent =
-            let tupletted = (nameAndPercent, fomulaItems)
-            tupletted
-        M makeKitProduct
     
     let runM (M f) nameAndPercent = f nameAndPercent
 
@@ -70,7 +64,7 @@ module Monads =
         let water = ("Water", 80.0)
         let coffeGrains = ("Coffee grains", 10.0)
         let sugar = ("Sugar", 10.0)
-        let coffeeMakerM = makeFormulation [|water; coffeGrains; sugar|]
+        let coffeeMakerM = returnM [|water; coffeGrains; sugar|]
 
         let cupOfCoffe = runM coffeeMakerM ("Cup of Coffe", 80.0)
         printResult cupOfCoffe
@@ -79,7 +73,7 @@ module Monads =
         let cupOfCoffeIncreased = runM coffeeMaker10DecialM ("Cup of Coffe +10%", 81.0)
         printResult cupOfCoffeIncreased
 
-        let gasolineMakerM = makeFormulation [|("Oil", 9.9); ("petroleum", 5.5);|]
+        let gasolineMakerM = returnM [|("Oil", 9.9); ("petroleum", 5.5);|]
         let combinatorMakerM = map2M combineFormulas gasolineMakerM coffeeMakerM
         let gasoCofee = runM combinatorMakerM ("gasoline coffee", 100.0)
         printResult gasoCofee
