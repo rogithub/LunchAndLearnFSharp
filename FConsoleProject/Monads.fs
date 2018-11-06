@@ -7,6 +7,12 @@ module Monads =
     type M<'T> =
         M of ('T -> 'T * 'T[])
     
+    let returnM formulaItems = 
+        let convertIntoM nameAndPercent = 
+            let tupletted = nameAndPercent, formulaItems
+            tupletted
+        M convertIntoM
+        
     let runM (M f) nameAndPercent = f nameAndPercent
 
     let mapM f formulationM =
@@ -24,13 +30,7 @@ module Monads =
             let newformulaItems  = f items1 items2
             let tupletted = (nameAndPercent, newformulaItems)
             tupletted
-        M transform
-    
-    let returnM formulaItems = 
-        let convertIntoM nameAndPercent = 
-            let tupletted = nameAndPercent, formulaItems
-            tupletted
-        M convertIntoM
+        M transform    
 
     let bindM f formulationM = 
         let binder nameAndPercent = 
